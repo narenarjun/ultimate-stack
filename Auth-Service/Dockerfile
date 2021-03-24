@@ -1,4 +1,4 @@
-FROM node:lts-alpine
+FROM quay.io/narendev/fishnode:alpine
 
 WORKDIR /app
 ENV PORT=4000
