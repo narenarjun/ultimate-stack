@@ -1,0 +1,11 @@
+name: mcs-orders-service
+autocreate: true
+image: quay.io/narendev/fishnode:1.0
+command: fish
+sync:
+- .:/usr/src/app
+forward:
+- 9229:9229
+- 3000:3000
+persistentVolume: {}
+
