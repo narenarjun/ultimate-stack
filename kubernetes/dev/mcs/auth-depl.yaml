@@ -18,6 +18,9 @@ spec:
       containers:
         - name: auth
           image: quay.io/ultimatestack/auth-svc:v1-beta
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 4000
           env:
             - name: AUTH_MONGO_DB_URI
               value: 'mongodb://auth-mongo-srv:27017/auth'
