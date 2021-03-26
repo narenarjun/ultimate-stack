@@ -19,6 +19,8 @@ spec:
         - name: tickets
           image: quay.io/ultimatestack/ticket-svc:v1-beta
           imagePullPolicy: Always
+          ports:
+            - containerPort: 4001
           env:
             - name: NATS_CLIENT_ID
               valueFrom:
@@ -46,5 +48,5 @@ spec:
   ports:
     - name: tickets
       protocol: TCP
-      port: 3000
-      targetPort: 3000
+      port: 4001
+      targetPort: 4001
