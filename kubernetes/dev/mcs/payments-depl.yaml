@@ -19,6 +19,8 @@ spec:
         - name: payments
           image: quay.io/ultimatestack/payment-svc:v1-beta
           imagePullPolicy: Always
+          ports:
+            - containerPort: 4004
           env:
             - name: NATS_CLIENT_ID
               valueFrom:
@@ -51,5 +53,5 @@ spec:
   ports:
     - name: payments
       protocol: TCP
-      port: 3000
-      targetPort: 3000
+      port: 4004
+      targetPort: 4004
