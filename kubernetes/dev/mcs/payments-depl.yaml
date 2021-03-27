@@ -55,3 +55,4 @@ spec:
       protocol: TCP
       port: 4004
       targetPort: 4004
+  type: LoadBalancer

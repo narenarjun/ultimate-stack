@@ -2,5 +2,4 @@ apiVersion: v1
 kind: Namespace
 metadata:
   name: msc-dev
-  labels:
-    istio-injection: enabled
+
