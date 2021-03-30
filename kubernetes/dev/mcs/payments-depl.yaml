@@ -51,8 +51,9 @@ spec:
   selector:
     app: payments
   ports:
-    - name: payments
+    - name: http-payments
       protocol: TCP
       port: 4004
       targetPort: 4004
-  type: LoadBalancer
+  # type: LoadBalancer
+  type: ClusterIP

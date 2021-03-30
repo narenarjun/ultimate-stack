@@ -36,3 +36,5 @@ or with kubectl
 ```bash
 kubectl label ns msc-dev istio-injection=enabled
 ```
+
+<!-- in debugging process of the nats eventbus working in istio  -->

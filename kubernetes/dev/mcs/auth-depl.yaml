@@ -38,9 +38,10 @@ spec:
   selector:
     app: auth
   ports:
-    - name: auth
+    - name: http-auth
       protocol: TCP
       port: 4000
       targetPort: 4000
-  type: LoadBalancer
+  # type: LoadBalancer
+  type: ClusterIP
 

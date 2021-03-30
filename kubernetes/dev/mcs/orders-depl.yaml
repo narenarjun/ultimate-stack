@@ -46,9 +46,10 @@ spec:
   selector:
     app: orders
   ports:
-    - name: orders
+    - name: http-orders
       protocol: TCP
       port: 4002
       targetPort: 4002
-  type: LoadBalancer
+  # type: LoadBalancer
+  type: ClusterIP
 
