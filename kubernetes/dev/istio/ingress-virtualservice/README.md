@@ -12,6 +12,4 @@
 
  prometheus , kiali, grafana and jaeger are added istio namespace to monitor and observe the pods
 
- <!-- TODO: add install yamls for the log and metrics stacks 
- 
- https://istio.io/latest/docs/ops/integrations/  -->
+ <!-- DONE: log and observe stack install yamls added 👍 -->
