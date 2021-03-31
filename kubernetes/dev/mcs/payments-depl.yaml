@@ -5,15 +5,18 @@ metadata:
   labels:
     type: dev-depl
     svcname: payment-svc
+    version: v1
 spec:
   replicas: 1
   selector:
     matchLabels:
       app: payments
+      # version: v1
   template:
     metadata:
       labels:
         app: payments
+        version: v1
     spec:
       containers:
         - name: payments
@@ -47,6 +50,9 @@ apiVersion: v1
 kind: Service
 metadata:
   name: payments-srv
+  labels:
+    app: payments
+    service: payments
 spec:
   selector:
     app: payments

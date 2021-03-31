@@ -5,15 +5,18 @@ metadata:
   labels:
     type: dev-depl
     svcname: orders-svc
+    version: v1
 spec:
   replicas: 1
   selector:
     matchLabels:
       app: orders
+      # version: v1
   template:
     metadata:
       labels:
         app: orders
+        version: v1
     spec:
       containers:
         - name: orders
@@ -42,6 +45,9 @@ apiVersion: v1
 kind: Service
 metadata:
   name: orders-srv
+  labels:
+    app: orders
+    service: orders
 spec:
   selector:
     app: orders

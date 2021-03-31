@@ -1,9 +1,9 @@
-apiVersion: networking.istio.io/v1beta1
-kind: DestinationRule
-metadata:
-  name: ticket-des
-spec:
-  host: tickets-srv.msc-dev.svc.cluster.local
-  trafficPolicy:
-    tls:
-      mode: ISTIO_MUTUAL
+# apiVersion: networking.istio.io/v1beta1
+# kind: DestinationRule
+# metadata:
+#   name: ticket-des
+# spec:
+#   host: tickets-srv.msc-dev.svc.cluster.local
+#   trafficPolicy:
+#     tls:
+#       mode: ISTIO_MUTUAL
