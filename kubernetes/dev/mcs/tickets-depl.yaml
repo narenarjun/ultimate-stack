@@ -11,14 +11,12 @@ spec:
   selector:
     matchLabels:
       app: tickets
-      # version: v1
+      version: v1
   template:
     metadata:
       labels:
         app: tickets
         version: v1
-      # annotations:
-      #   sidecar.istio.io/inject: "false" 
     spec:
       containers:
         - name: tickets
@@ -32,11 +30,11 @@ spec:
                 fieldRef:
                   fieldPath: metadata.name
             - name: NATS_URL
-              value: 'http://nats-srv:4222'
+              value: "http://nats-srv:4222"
             - name: NATS_CLUSTER_ID
               value: ticketing
             - name: TICKETS_MONGO_DB_URI
-              value: 'mongodb://tickets-mongo-srv:27017/tickets'
+              value: "mongodb://tickets-mongo-srv:27017/tickets"
             - name: JWTSECRET
               valueFrom:
                 secretKeyRef:
@@ -60,4 +58,3 @@ spec:
       targetPort: 4001
   # type: LoadBalancer
   type: ClusterIP
-  

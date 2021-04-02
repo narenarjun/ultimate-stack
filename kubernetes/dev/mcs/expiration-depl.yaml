@@ -11,7 +11,7 @@ spec:
   selector:
     matchLabels:
       app: expiration
-      # version: v1
+      version: v1
   template:
     metadata:
       labels:

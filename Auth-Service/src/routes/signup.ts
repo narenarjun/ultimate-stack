@@ -4,7 +4,14 @@ import jwt from "jsonwebtoken";
 import { BadRequestError,validateRequest } from "@wowowow/common";
 import { User } from "../models/user";
 
+
+
+
 const router = express.Router();
+
+
+
+
 
 router.post(
   "/api/users/signup",
