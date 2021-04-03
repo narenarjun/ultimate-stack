@@ -1,0 +1,164 @@
+openapi: '3.0.2'
+info:
+  title: Tickets Service
+  version: 'v1-beta'
+  description: "This is the tickets microservice for the ticketing App which handles orders creation, updation  and listing.
+               \n \n [Replace the `staging-cluster-domain-name.com` with the actual domain name seen when accessing this page].
+                \n \n **This is not a actual product, its is part of a protfolio project showscase.** "
+  contact:
+    name: "Narendran"
+    url: "https://github.com/narenarjun/ultimate-stack"
+  license:
+    name: "MIT"
+    url: "https://github.com/narenarjun/ultimate-stack/blob/master/LICENSE"
+servers:
+  - url: http://staging-cluster-domain-name.com
+    description: Url [Domain Name] of the staging k8s
+tags:
+  - name: Ticket
+    description: Handles Tickets creation, update and listing
+components:
+  securitySchemes:
+    cookieAuth:
+      type: apiKey
+      in: cookie
+      name: express:sess
+  schemas:
+    Ticket:
+      type: object
+      required:
+        - title
+        - price
+        - version
+        - id
+        - userId
+      properties:
+        title:
+          type: string
+          description: Name of the ticket
+        price:
+          type: number
+          description: Price of the ticket
+        version:
+          type: number
+          description: version of the ticket which tracks the number of changes it had since its creatation in it's price and name
+        id:
+          type: string
+          description: unique ID for the ticket
+        userId:
+          type: string
+          description: id associated with the user that created this ticket  
+      xml:
+        name: "Ticket"
+    
+paths:
+  /api/tickets:
+    get:
+      tags:
+        - Ticket
+      description: Lists all the tickets which are available for any users to order 
+      responses:
+        '200':
+          description: Successfully returns the list of all the tickets which can be ordered
+          content:
+            application/json:
+              schema:
+                type: array
+                $ref: "#/components/schemas/Ticket"
+    post:
+      tags: 
+        - Ticket
+      description: Creates a new ticket with the details provided by the user
+      security:
+        - cookieAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                  description: Title of the ticket provided by the user
+                price: 
+                  type: integer
+                  description: Price for the ticket provided by the user
+      responses:
+        '201':
+          description: successfully created a new ticket
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Ticket"
+        '400':
+          description: Bad request, request failed                
+        '401':
+          description: Not Authorized Error
+  /api/tickets/{Id}:
+    get:
+      tags:
+        - Ticket
+      description: Returns the details for the ticket associated with the ID provided
+      parameters:
+        - name: Id
+          in: path
+          required: true
+          description: ID of the ticket that needs to be fetched
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successfully returns the details of the ticket for the ticket Id requested
+          content:
+            application/json:
+              schema:
+                type: object
+                $ref: "#/components/schemas/Ticket"
+            
+        '401':
+          description: Not Authorized Error
+        '404':
+          description: Not found Error
+    put:
+      tags:
+        - Ticket
+      description: update the details for the ticket associated with the ID provided
+      parameters:
+        - name: Id
+          in: path
+          required: true
+          description: ID of the ticket that needs to be fetched
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                   description: New title for the ticket
+                   type: string
+                price:
+                   description: New price for the ticket
+                   type: integer   
+    
+      responses:
+        '201':
+          description: Successfully returns the updated details of the ticket for the ticket Id requested to update
+          content:
+            application/json:
+              schema:
+                type: object
+                $ref: "#/components/schemas/Ticket"
+        '400':
+          description: Bad Request Error    
+        '401':
+          description: Not Authorized Error
+        '404':
+          description: Not found Error  
+
+
+

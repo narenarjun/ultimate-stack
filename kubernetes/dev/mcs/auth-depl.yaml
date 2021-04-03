@@ -1,0 +1,53 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: auth-depl
+  labels:
+    type: dev-depl
+    svcname: auth-svc
+    version: v1
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: auth
+      version: v1
+  template:
+    metadata:
+      labels:
+        app: auth
+        version: v1
+    spec:
+      containers:
+        - name: auth
+          image: quay.io/ultimatestack/auth-svc:v1-beta
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 4000
+          env:
+            - name: AUTH_MONGO_DB_URI
+              value: 'mongodb://auth-mongo-srv:27017/auth'
+            - name: JWTSECRET
+              valueFrom:
+                secretKeyRef:
+                  name: jwt-secret
+                  key: JWT_KEY
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: auth-srv
+  labels:
+    app: auth
+    service: auth
+spec:
+  selector:
+    app: auth
+  ports:
+    - name: http-auth
+      protocol: TCP
+      port: 4000
+      targetPort: 4000
+  # type: LoadBalancer
+  type: ClusterIP
+

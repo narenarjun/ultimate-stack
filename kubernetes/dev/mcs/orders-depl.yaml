@@ -1,0 +1,61 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: orders-depl
+  labels:
+    type: dev-depl
+    svcname: orders-svc
+    version: v1
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: orders
+      version: v1
+  template:
+    metadata:
+      labels:
+        app: orders
+        version: v1
+    spec:
+      containers:
+        - name: orders
+          image: quay.io/ultimatestack/orders-svc:v1-beta
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 4002
+          env:
+            - name: NATS_CLIENT_ID
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name
+            - name: NATS_URL
+              value: 'http://nats-srv:4222'
+            - name: NATS_CLUSTER_ID
+              value: ticketing
+            - name: ORDERS_MONGO_DB_URI
+              value: 'mongodb://orders-mongo-srv:27017/orders'
+            - name: JWTSECRET
+              valueFrom:
+                secretKeyRef:
+                  name: jwt-secret
+                  key: JWT_KEY
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: orders-srv
+  labels:
+    app: orders
+    service: orders
+spec:
+  selector:
+    app: orders
+  ports:
+    - name: http-orders
+      protocol: TCP
+      port: 4002
+      targetPort: 4002
+  # type: LoadBalancer
+  type: ClusterIP
+

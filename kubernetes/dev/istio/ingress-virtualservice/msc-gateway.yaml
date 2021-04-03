@@ -1,0 +1,146 @@
+apiVersion: networking.istio.io/v1beta1
+kind: Gateway
+metadata:
+  name: msc-auth-gateway
+spec:
+  selector:
+    istio: ingressgateway # use istio default controller
+  servers:
+  - port:
+      number: 80
+      name: http
+      protocol: HTTP
+    hosts:
+    - "*"
+
+---
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  name: vs-auth-service
+spec:
+  hosts:
+  - "*"
+  gateways:
+  - msc-auth-gateway
+  http:
+  - match:
+    - uri:
+        prefix: /api/users
+    route:
+    - destination:
+        host: auth-srv
+        port:
+          number: 4000
+
+---
+apiVersion: networking.istio.io/v1beta1
+kind: Gateway
+metadata:
+  name: msc-ticket-gateway
+spec:
+  selector:
+    istio: ingressgateway # use istio default controller
+  servers:
+  - port:
+      number: 80
+      name: http
+      protocol: HTTP
+    hosts:
+    - "*"
+
+
+---    
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  name: vs-ticket-service
+spec:
+  hosts:
+  - "*"
+  gateways:
+  - msc-ticket-gateway
+  http:      
+  - match:
+    - uri:
+        prefix: /api/tickets
+    route:
+    - destination:
+        host: tickets-srv
+        port:
+          number: 4001
+
+---
+apiVersion: networking.istio.io/v1beta1
+kind: Gateway
+metadata:
+  name: msc-orders-gateway
+spec:
+  selector:
+    istio: ingressgateway # use istio default controller
+  servers:
+  - port:
+      number: 80
+      name: http
+      protocol: HTTP
+    hosts:
+    - "*"
+
+
+---
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  name: vs-orders-service
+spec:
+  hosts:
+  - "*"
+  gateways:
+  - msc-orders-gateway
+  http:      
+  - match:
+    - uri:
+        prefix: /api/orders
+    route:
+    - destination:
+        host: orders-srv
+        port:
+          number: 4002
+
+---
+
+apiVersion: networking.istio.io/v1beta1
+kind: Gateway
+metadata:
+  name: msc-payment-gateway
+spec:
+  selector:
+    istio: ingressgateway # use istio default controller
+  servers:
+  - port:
+      number: 80
+      name: http
+      protocol: HTTP
+    hosts:
+    - "*"
+
+
+---
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  name: vs-payments-service
+spec:
+  hosts:
+  - "*"
+  gateways:
+  - msc-payment-gateway
+  http:      
+  - match:
+    - uri:
+        exact: /api/payments
+    route:
+    - destination:
+        host: payments-srv
+        port:
+          number: 4004        

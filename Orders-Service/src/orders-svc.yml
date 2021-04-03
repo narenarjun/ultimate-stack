@@ -1,0 +1,175 @@
+openapi: '3.0.2'
+info:
+  title: Orders Service
+  version: 'v1-beta'
+  description: "This is the orders microservice for the ticketing App which handles orders creation, cancelling  and completion.
+               \n \n [Replace the `staging-cluster-domain-name.com` with the actual domain name seen when accessing this page].
+                \n \n **This is not a actual product, its is part of a protfolio project showscase.** "
+  contact:
+    name: "Narendran"
+    url: "https://github.com/narenarjun/ultimate-stack"
+  license:
+    name: "MIT"
+    url: "https://github.com/narenarjun/ultimate-stack/blob/master/LICENSE"
+servers:
+  - url: http://staging-cluster-domain-name.com
+    description: Url [Domain Name] of the staging k8s
+tags:
+  - name: Orders
+    description: Handles Orders creation, completion and cancellation
+components:
+  securitySchemes:
+    cookieAuth:
+      type: apiKey
+      in: cookie
+      name: express:sess
+  schemas:
+    Ticket:
+
+      type: object
+      required:
+        - title
+        - price
+        - version
+        - id
+      properties:
+        title:
+          type: string
+          description: Name of the ticket 
+        price:
+          type: number
+          description: Price of the ticket
+        version:
+          type: number
+          description: version of the ticket which tracks the number of changes it had since its creatation in it's price and name
+        id: 
+          type: string
+          description: unique ID for the ticket
+      xml:
+        name: "Ticket"                  
+    Order:
+      type: object
+      required:
+        - version
+        - id
+        - status
+        - userId
+        - expiresAt
+        - ticket
+      properties:
+        id:
+          type: string
+          description: ID for the order
+        version:
+          type: number
+          description: version of the ticker
+        status:
+          type: string
+          description: status of the order 
+          enum:
+            - 0: created
+            - 1: cancelled
+            - 2: paymentawaiting 
+            - 3: complete
+        expiresAt:
+          type: string
+          description: This amount of time after which the order will be marked as cancelled and will make the payment to it impossible    
+        ticket: 
+          description: ticket associated with the order
+          $ref: "#components/schemas/Ticket"
+paths:
+  /api/orders:
+    get:
+      tags:
+        - Orders
+      description: Lists all the orders associated with the user
+      security:
+        - cookieAuth: []
+      responses:
+        '200':
+          description: successfully returns all the orders associtated with the user
+          content:
+            application/json:
+              schema:
+                type: object
+                $ref: "#/components/schemas/Order"  
+        '400':
+          description: 'Bad request'        
+    post:
+      tags:
+        - Orders
+      description: Create a new order
+      security:
+        - cookieAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                ticketId:
+                   description: ID of the ticket to be ordered
+                   type: string
+      responses:
+        '201':
+          description: Successfully created a order for the ticket
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Order"
+        '400':
+          description: Bad request        
+  /api/order/{orderId}:
+    get:
+      tags:
+        - Orders
+      description: Gets the details for the requested orderId
+      security:
+        - cookieAuth: []
+      parameters:
+        - name: orderId
+          in: path
+          required: true
+          description: ID of the order that needs to be fetched
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successfully retrived the details of the order for requested orderId
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Order"
+        '401':
+          description: Not Authorized Error
+        '404':
+          description: Not found Error
+    delete:
+      tags:
+        - Orders
+      description: Cancelling a Order by changing it's status to cancelled                                   
+      security:
+        - cookieAuth: []
+      parameters:
+        - name: orderId
+          in: path
+          required: true
+          description: ID of the order that needs to be fetched
+          schema:
+            type: string
+      responses:
+        '204':
+           description: Successfully cancelled the order for the requested orderID
+           content:
+             application/json:
+               schema:
+                 $ref: "#/components/schemas/Order"
+        '401':
+          description: Not Authorized Error
+        '404':
+          description: Not found Error                
+          
+              
+
+              

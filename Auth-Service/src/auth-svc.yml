@@ -1,0 +1,139 @@
+openapi: '3.0.2'
+info:
+  title: Auth Service
+  version: 'v1-beta'
+  description: "This is the authentication microservice for the ticketing App which handles user registrations and authentications (such as sign-up, sign-out, sing-in). 
+               \n \n [Replace the `staging-cluster-domain-name.com` with the actual domain name seen when accessing this page]. 
+                \n \n **This is not a actual product, its is part of a protfolio project showscase.** "
+  contact:
+    name: "Narendran"
+    url: "https://github.com/narenarjun/ultimate-stack"
+  license:
+    name: "MIT"  
+    url: "https://github.com/narenarjun/ultimate-stack/blob/master/LICENSE" 
+servers:
+  - url: http://staging-cluster-domain-name.com
+    description: Url [Domain Name] of the staging k8s    
+tags:
+  - name: Auth
+    description: Handles user registrations and authentication
+components:
+  securitySchemes:
+    cookieAuth:
+      type: apiKey
+      in: cookie
+      name: express:sess
+  schemas:
+    User:
+      type: object
+      required:
+        - email
+        - password
+      properties:
+        email:
+          type: string
+          description: Users email ID used for account registration and identification
+        password:
+          type: string
+          description: A strong password of users choice between 4 to 20 characters
+paths:
+  /api/users/signup:
+    post:
+      summary: To register a new user
+      tags:
+        - Auth
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+             $ref: '#components/schemas/User'
+      responses:
+        '201':
+          description: User successfully registered
+          headers: 
+            express:sess:
+              schema: 
+                type: string
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  user:
+                    type: string
+                    description: users registered email ID
+                  id: 
+                    type: string
+                    description: auto generated ID
+        '400':
+          description: Bad Request
+  /api/users/signin:
+    post:
+      summary: Registered User signin
+      tags:
+        - Auth
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#components/schemas/User'
+      responses:
+        '200':
+          description: User Successful login
+          headers: 
+            express:sess:
+              schema: 
+                type: string
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  user:
+                    type: string
+                    description: users registered email ID
+                  id: 
+                    type: string
+                    description: auto generated ID
+        '400':
+          description: Bad Request     
+  /api/users/currentuser:
+    get:
+      summary: Get the details of the current user
+      security:
+        - cookieAuth: []
+      tags:
+        - Auth
+      requestBody:
+        required: false
+        content:
+          application/json:
+             schema:
+               {}
+      responses:
+        '200':
+          description: Details for the current user is returned         
+
+
+  /api/users/signout:
+    post:
+      summary: Signout a user
+      security:
+        - cookieAuth: []
+      tags:
+        - Auth
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+               {}
+      responses:
+        '200':
+          description: User successfully signed out
+                 
+          
+            
+

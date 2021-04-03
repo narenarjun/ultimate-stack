@@ -6,7 +6,17 @@ import cors from "cors";
 import { errorHandler, NotFoundError, currentUser } from "@wowowow/common";
 import { createChargeRouter } from "./routes/new";
 
+import swaggerUI from 'swagger-ui-express'
+import YAML from 'yamljs'
+
 const app = express();
+
+const swaggeryml = YAML.load('src/payment-svc.yml')
+
+const options = {
+  explorer:true
+}
+
 app.use(cors());
 app.set("trust proxy", true);
 app.use(json());
@@ -18,6 +28,7 @@ app.use(
 );
 
 app.use(currentUser);
+app.use('/api/payments/docs',swaggerUI.serve,swaggerUI.setup(swaggeryml,options))
 
 app.use(createChargeRouter)
 

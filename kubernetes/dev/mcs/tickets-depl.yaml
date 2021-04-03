@@ -1,0 +1,60 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tickets-depl
+  labels:
+    type: dev-depl
+    svcname: tickets-svc
+    version: v1
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: tickets
+      version: v1
+  template:
+    metadata:
+      labels:
+        app: tickets
+        version: v1
+    spec:
+      containers:
+        - name: tickets
+          image: quay.io/ultimatestack/ticket-svc:v1-beta
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 4001
+          env:
+            - name: NATS_CLIENT_ID
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name
+            - name: NATS_URL
+              value: "http://nats-srv:4222"
+            - name: NATS_CLUSTER_ID
+              value: ticketing
+            - name: TICKETS_MONGO_DB_URI
+              value: "mongodb://tickets-mongo-srv:27017/tickets"
+            - name: JWTSECRET
+              valueFrom:
+                secretKeyRef:
+                  name: jwt-secret
+                  key: JWT_KEY
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: tickets-srv
+  labels:
+    app: tickets
+    service: tickets
+spec:
+  selector:
+    app: tickets
+  ports:
+    - name: http-tickets
+      protocol: TCP
+      port: 4001
+      targetPort: 4001
+  # type: LoadBalancer
+  type: ClusterIP

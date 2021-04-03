@@ -8,8 +8,17 @@ import { deleteOrderRouter } from "./routes/delete";
 import { newOrderRouter } from "./routes/new";
 import { indexOrderRouter } from "./routes";
 import { showOrderRouter } from "./routes/show";
+import YAML from 'yamljs'
+import swaggerUI from 'swagger-ui-express'
 
 const app = express();
+
+const swaggeryml = YAML.load('src/orders-svc.yml')
+
+const options = {
+  explorer:true
+}
+
 app.use(cors());
 app.set("trust proxy", true);
 app.use(json());
@@ -19,6 +28,8 @@ app.use(
     // secure:true  //! when this is set to true, it'll only work on connection coming with https://
   })
 );
+
+app.use('/api/orders/docs',swaggerUI.serve,swaggerUI.setup(swaggeryml,options))
 
 app.use(currentUser);
 
