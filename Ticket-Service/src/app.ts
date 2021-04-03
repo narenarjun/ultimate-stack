@@ -9,7 +9,16 @@ import { showTicketRouter } from "./routes/show";
 import { indexTicketRouter } from "./routes";
 import { updateTicketRouter } from "./routes/update";
 
+import YAML from "yamljs";
+import swaggerUI from "swagger-ui-express";
+
 const app = express();
+
+const swaggeryml = YAML.load("src/ticket-svc.yml");
+const options = {
+  explorer: true,
+};
+
 app.use(cors());
 app.set("trust proxy", true);
 app.use(json());
@@ -21,6 +30,12 @@ app.use(
 );
 
 app.use(currentUser);
+
+app.use(
+  "/api/tickets/doc",
+  swaggerUI.serve,
+  swaggerUI.setup(swaggeryml, options)
+);
 
 app.use(createTicketRouter);
 app.use(showTicketRouter);
