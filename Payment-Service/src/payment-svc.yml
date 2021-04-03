@@ -1,0 +1,64 @@
+openapi: '3.0.2'
+info:
+  title: Payments Service
+  version: 'v1-beta'
+  description: "This is the payments microservice for the ticketing App which handles payments for the  orders requested by the user.
+               \n \n [Replace the `staging-cluster-domain-name.com` with the actual domain name seen when accessing this page].
+                \n \n **This is not a actual product, its is part of a protfolio project showscase.** "
+  contact:
+    name: "Narendran"
+    url: "https://github.com/narenarjun/ultimate-stack"
+  license:
+    name: "MIT"
+    url: "https://github.com/narenarjun/ultimate-stack/blob/master/LICENSE"
+servers:
+  - url: http://staging-cluster-domain-name.com
+    description: Url [Domain Name] of the staging k8s
+tags:
+  - name: Payments
+    description: Handles Payments for the User orders 
+components:
+  securitySchemes:
+    cookieAuth:
+      type: apiKey
+      in: cookie
+      name: express:sess
+paths:
+  /api/payments:
+    post:
+      description: charge the user for the order requested by the user
+      tags:
+        - Payments
+      security:
+        - cookieAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+             type: object
+             properties:
+               orderId:
+                 type: string
+                 description: orderId for the order for which the payment is to be made
+               token:
+                  type: string
+                  description: token given by the stripe after making a charge request from the client 
+      responses:
+        '201':
+          description: Payment successfully done and the order is completed
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    description: ID of the payment which was successfully completed
+        '404':
+          description: Not found Error            
+        '401':
+          description: Not Authorized Error                        
+        '400':
+          description: Bad Request Error          
+               

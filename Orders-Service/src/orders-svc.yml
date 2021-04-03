@@ -2,7 +2,7 @@ openapi: '3.0.2'
 info:
   title: Orders Service
   version: 'v1-beta'
-  description: "This is the orders microservice for the ticketing App with handles orders creation, cancelling  and completion.
+  description: "This is the orders microservice for the ticketing App which handles orders creation, cancelling  and completion.
                \n \n [Replace the `staging-cluster-domain-name.com` with the actual domain name seen when accessing this page].
                 \n \n **This is not a actual product, its is part of a protfolio project showscase.** "
   contact:

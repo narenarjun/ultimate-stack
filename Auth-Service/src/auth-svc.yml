@@ -2,7 +2,7 @@ openapi: '3.0.2'
 info:
   title: Auth Service
   version: 'v1-beta'
-  description: "This is the authentication microservice for the ticketing App with handles user registrations and authentications (such as sign-up, sign-out, sing-in). 
+  description: "This is the authentication microservice for the ticketing App which handles user registrations and authentications (such as sign-up, sign-out, sing-in). 
                \n \n [Replace the `staging-cluster-domain-name.com` with the actual domain name seen when accessing this page]. 
                 \n \n **This is not a actual product, its is part of a protfolio project showscase.** "
   contact:
