@@ -20,7 +20,7 @@ spec:
     spec:
       containers:
         - name: orders
-          image: quay.io/ultimatestack/orders-svc:v1-beta
+          image: quay.io/ultimatestack/orders-svc:v1.1-beta
           imagePullPolicy: Always
           ports:
             - containerPort: 4002

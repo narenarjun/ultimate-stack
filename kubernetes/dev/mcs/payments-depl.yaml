@@ -20,7 +20,7 @@ spec:
     spec:
       containers:
         - name: payments
-          image: quay.io/ultimatestack/payment-svc:v1-beta
+          image: quay.io/ultimatestack/payment-svc:v1.1-beta
           imagePullPolicy: Always
           ports:
             - containerPort: 4004
