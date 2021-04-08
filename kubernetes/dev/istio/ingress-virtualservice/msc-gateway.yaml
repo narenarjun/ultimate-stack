@@ -27,6 +27,8 @@ spec:
   - match:
     - uri:
         prefix: /api/users
+    - uri:
+        prefix: /api/auth    
     route:
     - destination:
         host: auth-srv
@@ -138,7 +140,7 @@ spec:
   http:      
   - match:
     - uri:
-        exact: /api/payments
+        prefix: /api/payments
     route:
     - destination:
         host: payments-srv
