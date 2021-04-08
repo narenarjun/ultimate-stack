@@ -21,7 +21,7 @@ const options = {
 
 const hostValues = process.env.ALLOWED_HOSTS;
 
-const hostArray = hostValues.split(",")
+const hostArray = hostValues!.split(",")
 
 
 const corsOptions = {

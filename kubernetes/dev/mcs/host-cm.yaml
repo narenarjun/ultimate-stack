@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: host-config
+
+data:
+  ALLOWED_HOSTS: http://localhost:3001,http://127.0.0.1
