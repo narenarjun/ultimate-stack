@@ -23,7 +23,18 @@ const options = {
   explorer:true
 }
 
-app.use(cors());
+const hostValues = process.env.ALLOWED_HOSTS;
+
+const hostArray = hostValues.split(",")
+
+
+const corsOptions = {
+  origin: hostArray,
+  credentials: true,
+  exposedHeaders: ["set-cookie"]
+}
+
+app.use(cors(corsOptions));
 app.set("trust proxy", true);
 app.use(json());
 app.use(

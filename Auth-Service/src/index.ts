@@ -12,6 +12,9 @@ const start = async () => {
   if (!process.env.AUTH_MONGO_DB_URI) {
     throw new Error("AUTH_MONGO_DB_URI must be defined")
   }
+  if(!process.env.ALLOWED_HOSTS){
+    throw new Error("ALLOWED_HOSTS value must be defined")
+  }
   try {
     // ! this must be changed to use environment variable
     await mongoose.connect(process.env.AUTH_MONGO_DB_URI, {
