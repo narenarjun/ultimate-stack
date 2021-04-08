@@ -27,6 +27,9 @@ const start = async () => {
   if (!process.env.STRIPE_KEY) {
     throw new Error("STRIPE_KEY must be defined");
   }
+  if(!process.env.ALLOWED_HOSTS){
+    throw new Error("ALLOWED_HOSTS value must be defined")
+  }
 
   try {
     // ! values for the nats client must be extracted to be used via environment variables

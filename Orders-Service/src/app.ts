@@ -8,18 +8,29 @@ import { deleteOrderRouter } from "./routes/delete";
 import { newOrderRouter } from "./routes/new";
 import { indexOrderRouter } from "./routes";
 import { showOrderRouter } from "./routes/show";
-import YAML from 'yamljs'
-import swaggerUI from 'swagger-ui-express'
+import YAML from "yamljs";
+import swaggerUI from "swagger-ui-express";
 
 const app = express();
 
-const swaggeryml = YAML.load('src/orders-svc.yml')
+const swaggeryml = YAML.load("src/orders-svc.yml");
 
 const options = {
-  explorer:true
+  explorer: true,
+};
+
+const hostValues = process.env.ALLOWED_HOSTS;
+
+const hostArray = hostValues.split(",")
+
+
+const corsOptions = {
+  origin: hostArray,
+  credentials: true,
+  exposedHeaders: ["set-cookie"]
 }
 
-app.use(cors());
+app.use(cors(corsOptions));
 app.set("trust proxy", true);
 app.use(json());
 app.use(
@@ -29,10 +40,13 @@ app.use(
   })
 );
 
-app.use('/api/orders/docs',swaggerUI.serve,swaggerUI.setup(swaggeryml,options))
-
 app.use(currentUser);
 
+app.use(
+  "/api/orders/docs",
+  swaggerUI.serve,
+  swaggerUI.setup(swaggeryml, options)
+);
 app.use(deleteOrderRouter);
 app.use(newOrderRouter);
 app.use(indexOrderRouter);
