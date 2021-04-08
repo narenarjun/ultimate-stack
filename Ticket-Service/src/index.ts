@@ -24,6 +24,9 @@ const start = async () => {
   if (!process.env.NATS_CLUSTER_ID) {
     throw new Error("NATS_CLUSTER_ID must be defined");
   }
+  if(!process.env.ALLOWED_HOSTS){
+    throw new Error("ALLOWED_HOSTS value must be defined")
+  }
   try {
     // ! values for the nats client must be extracted to be used via environment variables
     // ? nats client id (second value), will be great if we set it to the value of the pod name its running
