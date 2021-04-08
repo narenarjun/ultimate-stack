@@ -20,7 +20,7 @@ spec:
     spec:
       containers:
         - name: tickets
-          image: quay.io/ultimatestack/ticket-svc:v1.1-beta
+          image: quay.io/ultimatestack/ticket-svc:v1.2-beta
           imagePullPolicy: Always
           ports:
             - containerPort: 4001
@@ -40,6 +40,9 @@ spec:
                 secretKeyRef:
                   name: jwt-secret
                   key: JWT_KEY
+          envFrom:
+            - configMapRef:
+                name: host-config                  
 ---
 apiVersion: v1
 kind: Service
