@@ -3,7 +3,7 @@ import useRequest from '../../hooks/use-request';
 
 const TicketShow = ({ ticket }) => {
   const { doRequest, errors } = useRequest({
-    url: `http://${process.env.BASEURL}/api/orders`,
+    url: `http://${process.env.NEXT_PUBLIC_BASEURL}/api/orders`,
     method: 'post',
     body: {
       ticketId: ticket.id,

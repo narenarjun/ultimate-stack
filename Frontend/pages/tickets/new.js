@@ -7,7 +7,7 @@ const NewTicket = () => {
   const [title, setTitle] = useState("");
   const [price, setPrice] = useState("");
   const { doRequest, errors } = useRequest({
-    url: `http://${process.env.BASEURL}/api/tickets`,
+    url: `http://${process.env.NEXT_PUBLIC_BASEURL}/api/tickets`,
     method: "post",
     body: {
       title,

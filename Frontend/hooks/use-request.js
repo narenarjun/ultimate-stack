@@ -7,7 +7,6 @@ const useRequest = ({ url, method, body, onSuccess }) => {
   const doRequest = async (props = {}) => {
     try {
       setErrors(null);
-      console.log("this is the values in  body: ", body);
       const response = await axios[method](
         url,
         { ...body, ...props },
