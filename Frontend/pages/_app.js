@@ -26,7 +26,6 @@ AppComponent.getInitialProps = async (appContext) => {
   const { data } = await client.get(urlvl);
 
 
-  console.log("this is data from _app.js page :", data);
   let pageProps = {};
   if (appContext.Component.getInitialProps) {
     pageProps = await appContext.Component.getInitialProps(
