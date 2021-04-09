@@ -1,8 +1,15 @@
-FROM node:lts-alpine
+FROM quay.io/narendev/fishnode:alpine
 
 WORKDIR /app
+
 COPY package.json .
+
 RUN yarn install
+
 COPY . .
 
-CMD ["yarn","dev"]
+RUN yarn build 
+
+EXPOSE 3002
+
+CMD ["yarn","start"]

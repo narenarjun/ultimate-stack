@@ -15,11 +15,11 @@ const useRequest = ({ url, method, body, onSuccess }) => {
           headers: {
             "Content-Type": "application/json",
           },
-          // withCredentials: true,
+          withCredentials: true,
         }
       );
 
-      console.log("this is the response after signup", response.headers);
+      console.log("this is the response after signup", response);
       if (onSuccess) {
         onSuccess(response.data);
       }
