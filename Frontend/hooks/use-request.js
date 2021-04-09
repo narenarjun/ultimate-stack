@@ -19,14 +19,12 @@ const useRequest = ({ url, method, body, onSuccess }) => {
         }
       );
 
-      console.log("this is the response after signup", response);
       if (onSuccess) {
         onSuccess(response.data);
       }
 
       return response.data;
     } catch (err) {
-      console.log("the error which happened :", err);
       setErrors(
         <div className="alert alert-danger">
           <h4>Ooops....</h4>

@@ -146,3 +146,42 @@ spec:
         host: payments-srv
         port:
           number: 4004        
+
+---
+
+apiVersion: networking.istio.io/v1beta1
+kind: Gateway
+metadata:
+  name: msc-frontend-gateway
+spec:
+  selector:
+    istio: ingressgateway # use istio default controller
+  servers:
+  - port:
+      number: 80
+      name: http
+      protocol: HTTP
+    hosts:
+    - "*"
+
+
+---
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  name: vs-frontend-service
+spec:
+  hosts:
+  - "*"
+  gateways:
+  - msc-frontend-gateway
+  http:      
+  - match:
+    - uri:
+        prefix: /
+    route:
+    - destination:
+        host: frontend-srv
+        port:
+          number: 3001        
+

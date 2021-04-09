@@ -13,7 +13,6 @@ const SignIn = () => {
       password,
     },
     onSuccess: () => Router.push("/"),
-    // onSuccess: () => console.log("signed in"),
   });
 
   const onSubmit = async (event) => {
