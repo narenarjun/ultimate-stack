@@ -8,8 +8,8 @@ RUN yarn install
 
 COPY . .
 
-RUN yarn build 
+# RUN yarn build 
 
-EXPOSE 3002
+EXPOSE 3001
 
-CMD ["yarn","start"]
+CMD ["yarn","dev"]
