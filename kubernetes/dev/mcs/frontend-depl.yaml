@@ -27,6 +27,8 @@ spec:
           env:
             - name: NEXT_PUBLIC_BASEURL
               value: '437b59f7-2960-4267-b2e0-7124e5d3df04.k8s.civo.com'
+            - name: NEXT_PUBLIC_STRIPE_KEY
+              value: 'pk_test_51IWeSrSGJ6cJaAGg6Be4Ty2WnNfEwASS11HO2syVLoAJGesykRVi9K19rzTjTBUBySdezIcFwHzDLyp2oX4BIssn007PlgW6Za'  
             
 ---
 apiVersion: v1
