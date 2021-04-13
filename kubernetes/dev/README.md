@@ -37,4 +37,10 @@ or with kubectl
 kubectl label ns msc-dev istio-injection=enabled
 ```
 
-<!-- in debugging process of the nats eventbus working in istio  -->
+### config map
+
+A config map called `host-config` is used to deliver whitelisted/approved domain names to apply CORS on the server. 
+
+
+
+> 📚 NOTE: Most of the dev work on v1-beta is done. ready to push towards staging

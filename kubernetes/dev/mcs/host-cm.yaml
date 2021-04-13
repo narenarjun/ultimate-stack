@@ -4,4 +4,4 @@ metadata:
   name: host-config
 
 data:
-  ALLOWED_HOSTS: http://localhost:3001,http://127.0.0.1
+  ALLOWED_HOSTS: http://localhost:3001,http://127.0.0.1,http://437b59f7-2960-4267-b2e0-7124e5d3df04.k8s.civo.com

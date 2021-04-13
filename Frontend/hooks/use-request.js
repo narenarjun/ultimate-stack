@@ -7,7 +7,6 @@ const useRequest = ({ url, method, body, onSuccess }) => {
   const doRequest = async (props = {}) => {
     try {
       setErrors(null);
-      console.log("this is the values in  body: ", body);
       const response = await axios[method](
         url,
         { ...body, ...props },
@@ -15,18 +14,16 @@ const useRequest = ({ url, method, body, onSuccess }) => {
           headers: {
             "Content-Type": "application/json",
           },
-          // withCredentials: true,
+          withCredentials: true,
         }
       );
 
-      console.log("this is the response after signup", response.headers);
       if (onSuccess) {
         onSuccess(response.data);
       }
 
       return response.data;
     } catch (err) {
-      console.log("the error which happened :", err);
       setErrors(
         <div className="alert alert-danger">
           <h4>Ooops....</h4>

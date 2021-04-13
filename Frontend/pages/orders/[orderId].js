@@ -16,7 +16,11 @@ const OrderShow = ({ order, currentUser }) => {
 
   useEffect(() => {
     const findTimeLeft = () => {
+<<<<<<< HEAD
       const msLeft = new Date(order.expiresAt) - new DataCue();
+=======
+      const msLeft = new Date(order.expiresAt) - new Date();
+>>>>>>> master
       setTimeLeft(Math.round(msLeft / 1000));
     };
 
@@ -37,7 +41,7 @@ const OrderShow = ({ order, currentUser }) => {
       Time left to pay: {timeLeft} seconds
       <StripeCheckout
         token={({ id }) => doRequest({ token: id })}
-        stripeKey=""
+        stripeKey= {`${process.env.NEXT_PUBLIC_STRIPE_KEY}`}
         amount={order.ticket.price * 100}
         email={currentUser.email}
       />
