@@ -1,0 +1,18 @@
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  name: vs-orders-service
+spec:
+  hosts:
+  - "*"
+  gateways:
+  - glotixz-ordersrv-gateway
+  http:      
+  - match:
+    - uri:
+        prefix: /api/orders
+    route:
+    - destination:
+        host: order-srv
+        port:
+          number: 4002
