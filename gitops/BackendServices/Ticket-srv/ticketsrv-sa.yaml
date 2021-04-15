@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: glotixz-ticketsrv
+  labels:
+    account: ticketsrv
+    type: depl
