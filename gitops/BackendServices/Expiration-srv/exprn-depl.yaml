@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: expiration-depl
+  labels:
+    type: stage-depl
+    svcname: expiration-svc
+    version: v1
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: expiration
+      version: v1
+  template:
+    metadata:
+      labels:
+        app: expiration
+        version: v1
+    spec:
+      serviceAccountName: glotixz-expirationsrv
+      containers:
+        - name: expiration
+          image: quay.io/ultimatestack/expiration-svc:v1-beta
+          env:
+            - name: NATS_CLIENT_ID
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name
+            - name: NATS_URL
+              value: "http://nats-srv:4222"
+            - name: NATS_CLUSTER_ID
+              value: ticketing
+            - name: REDIS_HOST
+              value: expiration-redis-srv
