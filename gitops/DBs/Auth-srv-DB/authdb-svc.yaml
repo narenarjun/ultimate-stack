@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: authdb-sts-srv
+spec:
+  selector:
+    app: authdb-mongo
+  ports:
+  - port: 27017
+    targetPort: 27017
+    protocol: TCP
+    name: authdb
+  type: ClusterIP  
