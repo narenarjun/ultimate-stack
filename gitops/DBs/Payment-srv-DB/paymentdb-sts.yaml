@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: paymentdb-sts
+  labels:
+    env-type: stagedb
+    version: v1
+spec:
+  selector:
+    matchLabels:
+      app: paymentdb-mongo
+  serviceName: paymentdb-sts-srv
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: paymentdb-mongo
+    spec:
+      serviceAccountName: glotixz-paymentdb
+      containers:
+      - name: paymentdb-mongo
+        image: mongo
+        imagePullPolicy: Always
+        volumeMounts:
+        - name: paymentdb-presistent
+          mountPath: /data/db
+  volumeClaimTemplates:
+  - metadata:
+      name: paymentdb-presistent
+    spec:
+      storageClassName: longhorn
+      accessModes: [ "ReadWriteOnce" ]
+      resources:
+        requests:
+          storage: 1Gi

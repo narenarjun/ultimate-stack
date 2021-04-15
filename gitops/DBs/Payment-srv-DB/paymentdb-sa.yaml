@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: glotixz-paymentdb
+  labels:
+    account: paymentdb
+    type: sts
