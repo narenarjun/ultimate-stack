@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: glotixz-fntbluksvc
+  labels:
+    account: fntbluksvc
+    type: ksvc
