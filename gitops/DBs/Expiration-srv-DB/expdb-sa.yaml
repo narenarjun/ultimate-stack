@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: glotixz-expdb
+  labels:
+    account: expdb
+    type: sts

@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: expiration-redis-sts
+  labels:
+    env-type: stagedb
+    version: v1
+spec:
+  selector:
+    matchLabels:
+      app: expiration-redis
+  serviceName: expiration-redis-srv
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: expiration-redis
+    spec:
+      serviceAccountName: glotixz-expdb
+      containers:
+        - name: expiration-redis
+          image: redis
+          imagePullPolicy: Always
+          volumeMounts:
+            - name: data
+              mountPath: /data
+            - name: conf
+              mountPath: /etc/redis
+  volumeClaimTemplates:
+    - metadata:
+        name: data
+      spec:
+        storageClassName: longhorn
+        accessModes: ["ReadWriteOnce"]
+        resources:
+          requests:
+            storage: 500Mi
+    - metadata:
+        name: conf
+      spec:
+        storageClassName: longhorn
+        accessModes: ["ReadWriteOnce"]
+        resources:
+          requests:
+            storage: 10Mi
