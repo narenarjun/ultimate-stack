@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: orderdb-sts
+  labels:
+    env-type: stagedb
+    version: v1
+spec:
+  selector:
+    matchLabels:
+      app: orderdb-mongo
+  serviceName: orderdb-sts-srv
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: orderdb-mongo
+    spec:
+      serviceAccountName: glotixz-orderdb
+      containers:
+      - name: orderdb-mongo
+        image: mongo
+        imagePullPolicy: Always
+        volumeMounts:
+        - name: orderdb-presistent
+          mountPath: /data/db
+  volumeClaimTemplates:
+  - metadata:
+      name: orderdb-presistent
+    spec:
+      storageClassName: longhorn
+      accessModes: [ "ReadWriteOnce" ]
+      resources:
+        requests:
+          storage: 1Gi
