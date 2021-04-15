@@ -2,5 +2,3 @@ apiVersion: v1
 kind: Namespace
 metadata:
   name: glotixz
-  labels:
-    istio-injection: enabled
