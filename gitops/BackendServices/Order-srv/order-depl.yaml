@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: order-depl
+  labels:
+    type: stage-depl
+    svcname: order-svc
+    version: v1
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: order
+      version: v1
+  template:
+    metadata:
+      labels:
+        app: order
+        version: v1
+    spec:
+      serviceAccountName: glotixz-ordersrv
+      containers:
+        - name: order
+          image: quay.io/ultimatestack/orders-svc:v1.2-beta
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 4002
+          env:
+            - name: NATS_CLIENT_ID
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name
+            - name: NATS_URL
+              value: 'http://nats-srv:4222'
+            - name: NATS_CLUSTER_ID
+              value: ticketing
+            - name: ORDERS_MONGO_DB_URI
+              value: 'mongodb://orderdb-sts-srv:27017/orders'
+            - name: JWTSECRET
+              valueFrom:
+                secretKeyRef:
+                  name: jwt-secret
+                  key: JWT_KEY
+          envFrom:
+            - configMapRef:
+                name: host-config                  
