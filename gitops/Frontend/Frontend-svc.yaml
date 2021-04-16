@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: frontend-srv
+  labels:
+    app: glotixz-frontend
+    service: frontend
+spec:
+  selector:
+    app: glotixz-frontend
+  ports:
+    - name: http-frontend
+      protocol: TCP
+      port: 3001
+      targetPort: 3001
+  type: ClusterIP
+

@@ -1,0 +1,18 @@
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  name: vs-frontend-service
+spec:
+  hosts:
+  - "*"
+  gateways:
+  - glotixz-frontend-gateway
+  http:      
+  - match:
+    - uri:
+        prefix: /
+    route:
+    - destination:
+        host: frontend-srv
+        port:
+          number: 3001        
