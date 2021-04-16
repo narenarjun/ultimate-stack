@@ -3,4 +3,4 @@ kind: ConfigMap
 metadata:
   name: host-config
 data:
-  ALLOWED_HOSTS: http://bluedeployment.glotixz.e20b4706-9ba3-4496-a857-b8b531dd5a38.k8s.civo.com,http://localhost:3001,http://127.0.0.1
+  ALLOWED_HOSTS: http://bluedeployment.glotixz.e20b4706-9ba3-4496-a857-b8b531dd5a38.k8s.civo.com,http://localhost:3001,http://127.0.0.1,http://e20b4706-9ba3-4496-a857-b8b531dd5a38.k8s.civo.com
