@@ -11,8 +11,6 @@ spec:
   - match:
     - uri:
         prefix: /
-    rewrite:
-      uri: /bluedeployment    
     route:
     - destination:
         host: frontend-srv
