@@ -435,20 +435,33 @@ $>> kubectl apply -f .
 > All the obervability and monitoring addons are installed with default configuration provided with the istio release
 
 
-##### ✨ Kiali:
+#### ✨ Kiali:
 `Kiali` is an observability console for Istio with service mesh configuration and validation capabilities. It helps you understand the structure and health of your service mesh by monitoring traffic flow to infer the topology and report errors. Kiali provides detailed metrics and a basic `Grafana` integration, which can be used for advanced queries. Distributed tracing is provided by integration with `Jaeger`.
-##### ✨ Grafana:
+
+Accessing the kiali dashboard:
+
+with `istioctl`:
+```bash
+$>> istioctl dashboard kiali
+```
+
+with `kubectl`:
+```bash
+$>> kubectl -n istio-system port-forward svc/kiali 20001:20001
+```
+
+#### ✨ Grafana:
 `Grafana` is an open source monitoring solution that can be used to configure dashboards for Istio. 
 We can use Grafana to monitor the health of Istio and of applications within the service mesh.
 
 The metrics from the glotixz app:
 ![Grafana dashboard](./pictures/glotixz-grafana-overview.PNG "grafana dashboard showing workload metrics")
 
-##### ✨ Prometheus:
+#### ✨ Prometheus:
 Prometheus is an open source monitoring system and time series database. We can use Prometheus with Istio to record metrics that track the health of Istio and of applications within the service mesh. We can visualize metrics using tools like Grafana and Kiali.
 
 
-##### ✨ Jaeger:
+#### ✨ Jaeger:
 `Jaeger` is an open source end to end distributed tracing system, allowing users to monitor and troubleshoot transactions in complex distributed systems.
 
 App overview in the Jaeger Dashboard:
@@ -481,15 +494,16 @@ Tracing for the requests in the Jaeger Dashboard:
 <!-- ### ✨✨  -->
 ### ✨✨ Futher Future Improvements 🛠️💻⏳:
 These are the possible future improvement which can be made to make the even more solid and functional. They are:
-☐ Upgrade connection from `http` to `https` with TLS certifactes by use of `cert-manager` which automates certificate management in the k8s cluster.
-☐ Lock `authentication` and `authorization` access to the apps deployemts and to it's relative Database statefulset deployemts respectively in the Istio's `PeerAuthentication` mode set to `STRICT`.
-☐ Implement and Migrate the backend service from the `cookie/cookie-session` based authentication to the `Authentication bearer token` based auth.
-☐ Improve  styling in the Frontend App.
-☐ Make Frontend a static site and remove all the SSR components and use `redux` or `redux-tool` for solid statemanagment and use `typescript` in the frontend too.
-☐ Create and deploy database with replicasets with primary and secondary replicators enabled with data replication. https://docs.mongodb.com/manual/core/replica-set-architecture-three-members/
-☐ Improve cluster security with using [Falco](https://falco.org/).
-☐ Create and add more Services such as `Ads-service`, `User-service`, `Recommendation-Service` and `Email-service` respectively in accordance with their useage to the Glotixz app.
-☐ Add `Chaos-Testing` 
-☐ Create and add kustomise templated for the k8s yamls for the glotixz app
-☐ Test the application in a `Openshift` environment
-☐ Try to create IaC with [pulumi](https://www.pulumi.com/)
+- ☐ Upgrade connection from `http` to `https` with TLS certifactes by use of `cert-manager` which automates certificate management in the k8s cluster.
+- ☐ Lock `authentication` and `authorization` access to the apps deployemts and to it's relative Database statefulset deployemts respectively in the Istio's `PeerAuthentication` mode set to `STRICT`.
+- ☐ Move to use a solid Typescript based framework like nestjs for the Backend APIs.
+- ☐ Implement and Migrate the backend service from the `cookie/cookie-session` based authentication to the `Authentication bearer token` based auth.
+- ☐ Improve  styling in the Frontend App.
+- ☐ Make Frontend a static site and remove all the SSR components and use `redux` or `redux-tool` for solid statemanagment and use `typescript` in the frontend too.
+- ☐ Create and deploy database with replicasets with primary and secondary replicators enabled with data replication. https://docs.mongodb.com/manual/core/replica-set-architecture-three-members/
+- ☐ Improve cluster security with using [Falco](https://falco.org/).
+- ☐ Create and add more Services such as `Ads-service`, `User-service`, `Recommendation-Service` and `Email-service` respectively in accordance with their useage to the Glotixz app.
+- ☐ Add `Chaos-Testing` 
+- ☐ Create and add kustomise templated for the k8s yamls for the glotixz app
+- ☐ Test the application in a `Openshift` environment
+- ☐ Try to create IaC with [pulumi](https://www.pulumi.com/)
