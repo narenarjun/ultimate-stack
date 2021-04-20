@@ -6,6 +6,9 @@
 
 The complete Glotixz microservices apps are developed and deployed in [CIVO Kubernetes platform](https://www.civo.com/).
 
+> #### ✨✨✨Note 📚:
+> The deployments are optimized only for staging k8s cluster only and not yet for production cluster.
+
 ## ✨✨✨ Overview 🍁:
 
 Ultimate Stack [Glotixz] is a Typescript/Javascript based fullstack ecommerce app which can be used to sell tickets for events by users registered in the app and payment is fullfilled by [stripe](stripe.com).
