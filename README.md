@@ -1,7 +1,7 @@
-# <div align="center" >🌟🌟🌟🌟🌟 Glotixz - Ultimate Stack 🌟🌟🌟🌟🌟</div>
+# <div align="center" >✨Glotixz - Ultimate Stack </div>
 
 
- **Ultimate Stack** *[Glotixz]* is a  Event Driven Microservices Fullstack Ecommerce App deployed and  running on `Kubernetes` with `istio` as the *`service-mesh`* and cloudnative serverless components by `knative` and deployed to k8s via Gitops pipeline with `ArgoCD` and the kubernetes platform is built as Infrastructure as Code [IaC] with `Terraform` .
+ **Ultimate Stack** *[Glotixz]* is a  Event Driven Microservices Fullstack Ecommerce App deployed and  running on `Kubernetes` with `istio` as the *`service-mesh`* and cloudnative serverless components by `knative` and deployed to Kubernetes via Gitops pipeline with `ArgoCD` and the kubernetes platform is built as Infrastructure as Code [IaC] with `Terraform` .
 
 
 The complete Glotixz microservices apps are developed and deployed in [CIVO Kubernetes platform](https://www.civo.com/).
@@ -19,7 +19,7 @@ All the backend serivces along with their respective databases and frontend is d
 
 The complete overview of the Architecture and workflow:
 
-![Glotix - (Ultimate Stack) Overall Architecture Overview](./pictures/glotixz-ultimate-stack-overview.png "Glotix - (Ultimate Stack) Overall Architecture Overview")
+![Glotix - (Ultimate Stack) Overall Architecture Overview](./pictures/ultimate-stack-overview.svg "Glotix - (Ultimate Stack) Overall Architecture Overview")
 
 
 
@@ -37,7 +37,7 @@ The complete overview of the Architecture and workflow:
 - [draw.io](draw.io) - to create the architecture overview diagram
 - [Excalidraw](https://www.excalidraw.com/) - used to sketch out various simple architecture decision diagrams
 
-### ✨✨ Cloud Native development ☸️🧰♻️💻:
+### ✨✨ Cloud Native development ☸️:
 
 This project is entirely built with cloud native development process on kubernetes with the use of the [okteto cli](https://okteto.com/docs/getting-started/installation). 
 Okteto cli make the development process ease with the use of the [okteto.yaml](https://okteto.com/docs/reference/manifest) manifest file as it does the abstraction of connection between the local IDE/Editor (vscode was my preferred editor).
@@ -143,7 +143,7 @@ The Frontend for the Glotixz app is created by using the [`NextJS`](https://next
 
 
 
-### ✨✨ Details of the Backend MicroServices ⛓️✡️🔅:
+### ✨✨ Details of the Backend MicroServices ⛓️:
 The Backend services are written in `Typescript` with `Expressjs` web framework  which runs on the `NodeJS` **v14** runtime.
 
 There are a total of 5 microservices which handles one core group functionality each respectively. The microservices are:
@@ -237,7 +237,7 @@ $>> yarn add node-nats-streaming
 >  https://github.com/nats-io/nats-operator/issues/88 
 
 
-### ✨✨ ServiceMesh ✳️⚛️✳️:
+### ✨✨ ServiceMesh ✳️:
 
 Istio is the service mesh chosen for this event-driven microservices.
 
@@ -305,7 +305,7 @@ $>> kubectl -n longhorn-system  port-forward svc/longhorn-frontend 80:80
 
 ![Longhorn UI dashboard](./pictures/glotixz-longhorn.PNG "longhorn UI dashboard showing storage Info")
 
-### ✨✨ Secret Management 🔏🗝️🔒🔐:
+### ✨✨ Secret Management 🔏:
 Secrets are sensitive info which are critical for the working of the app and it shouldn't be publicly exposed, which makes the management of secrets a **Herculean** task as we can't store them in git repos.
 
 To overcome this shortfalls, Kubernetes community have `Sealed Secrets`. 
@@ -335,7 +335,7 @@ More details about the working of the sealed secrets can be found in my [sealeds
 > ### ✨✨ Note 📚:
 > There are other secret management soultions exists for kubernetes such as HashiCorps' Vault, Azure Key Vault, AWS Secrets Manager ,etc.,.
 
-### ✨✨ Container Image Repository 🚢📦🛳️:
+### ✨✨ Container Image Repository 🚢:
 [Quay](quay.io) is the container Image Repository chosed for building and storing all the container images related to this Ultimate stack project/repo.
 
 [Quay](quay.io) is Red Hat®s'  private container registry that stores, builds, and deploys container images. It analyzes container images for security vulnerabilities, identifying potential issues that can help you mitigate security risks.
@@ -347,11 +347,11 @@ A new organization called "[`Ultimate stack`](https://quay.io/organization/ultim
 All the container are built via git based build triggers set in quay registry which are triggered to a build when a commit is made.
 
 
-### ✨✨ Gitops 🧿🚀🧿:
+### ✨✨ Gitops 🧿:
 
 GitOps is the modern way of implementing Continuous Deployment and Continuous Integration [CI/CD] for cloud native applications in the kubernetes cluster.
 
-#### ✨ ArgoCD 📁🐙🔀:
+#### ✨ ArgoCD 🐙:
 
 [ArgoCD](https://argoproj.github.io/projects/argo-cd) is the choice of Gitops tool chosen to do Continuous deployment for this project.
 [ArgoCD](https://argoproj.github.io/projects/argo-cd) is a declarative, GitOps continuous delivery tool for Kubernetes.
@@ -403,7 +403,7 @@ syncPolicy:
 > the password for login and how to reset can be found in the [docs here](https://argo-cd.readthedocs.io/en/stable/getting_started/#4-login-using-the-cli).
 
 
-#### ✨ Tekton ➰🐕✳️:
+#### ✨ Tekton :
 
 [Tekton](https://tekton.dev/) is a powerful and flexible open-source framework for creating CI/CD systems,
 allowing developers to build, test, and deployacross cloud providers and on-premise systems.
@@ -495,7 +495,7 @@ Tracing for the requests in the Jaeger Dashboard:
  -->
 
 <!-- ### ✨✨  -->
-### ✨✨ Futher Future Improvements 🛠️💻⏳:
+### ✨✨ Futher Future Improvements ⏳:
 These are the possible future improvement which can be made to make the even more solid and functional. They are:
 - ☐ Upgrade connection from `http` to `https` with TLS certifactes by use of `cert-manager` which automates certificate management in the k8s cluster.
 - ☐ Lock `authentication` and `authorization` access to the apps deployemts and to it's relative Database statefulset deployemts respectively in the Istio's `PeerAuthentication` mode set to `STRICT`.
