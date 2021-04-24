@@ -1,6 +1,5 @@
 # Authentication Service
 
-### datails (WIP)
 
 #### creating openAPI swagger docs.
 

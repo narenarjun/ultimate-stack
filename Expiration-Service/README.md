@@ -1,3 +1,1 @@
 # Expiration Service
-
-### Details (WIP)

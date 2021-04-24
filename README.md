@@ -1,7 +1,7 @@
 # <div align="center" >✨Glotixz - Ultimate Stack </div>
 
 
- **Ultimate Stack** *[Glotixz]* is a  Event Driven Microservices Fullstack Ecommerce App deployed and  running on `Kubernetes` with `istio` as the *`service-mesh`* and cloudnative serverless components by `knative` and deployed to Kubernetes via Gitops pipeline with `ArgoCD` and the kubernetes platform is built as Infrastructure as Code [IaC] with `Terraform` .
+ **Ultimate Stack** *[Glotixz]* is a  Event Driven Microservices Ecommerce App deployed and  running on `Kubernetes` with `istio` as the *`service-mesh`* and cloudnative serverless components by `knative` and deployed to `Kubernetes` via Gitops pipeline with `ArgoCD` and the kubernetes platform is built as Infrastructure as Code [IaC] with `Terraform` .
 
 
 The complete Glotixz microservices apps are developed and deployed in [CIVO Kubernetes platform](https://www.civo.com/).

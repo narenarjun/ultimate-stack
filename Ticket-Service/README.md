@@ -1,3 +1,1 @@
 # Ticket Service
-
-### datails (WIP)

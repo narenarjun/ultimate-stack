@@ -1,3 +1,1 @@
 # Orders Service
-
-### Details (WIP)

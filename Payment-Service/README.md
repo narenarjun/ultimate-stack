@@ -1,3 +1,1 @@
 # Payment Service
-
-### Details (WIP)
