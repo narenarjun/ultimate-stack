@@ -19,7 +19,7 @@ All the backend serivces along with their respective databases and frontend is d
 
 The complete overview of the Architecture and workflow:
 
-![Glotix - (Ultimate Stack) Overall Architecture Overview](./pictures/ultimate-stack-overview.svg "Glotix - (Ultimate Stack) Overall Architecture Overview")
+![Glotix - (Ultimate Stack) Overall Architecture Overview](./pictures/ultimate-stack-overview.png "Glotix - (Ultimate Stack) Overall Architecture Overview")
 
 
 
